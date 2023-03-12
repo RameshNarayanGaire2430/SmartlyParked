@@ -18,6 +18,13 @@
         <item name="android:textColorPrimary">@color/black</item>
         <item name="colorControlNormal">@android:color/white</item>
 
-
     </style>
+
+    <style name="Theme.SmartlyParked.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">#B3E5FC</item>
+    </style>
+
+
 </resources>

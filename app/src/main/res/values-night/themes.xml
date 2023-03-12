@@ -13,4 +13,16 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ToolBarStyle" parent="Theme.SmartlyParked">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorControlNormal">@android:color/black</item>
+
+    </style>
+
+    <style name="Theme.SmartlyParked.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">#212121</item>
+    </style>
 </resources>
