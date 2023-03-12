@@ -11,8 +11,7 @@
         android:roundIcon="@drawable/parking_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartlyParked"
-        tools:targetApi="33"
-        tools:ignore="ExtraText">
+        tools:targetApi="33">
         <activity
             android:name=".MainActivity"
             android:exported="true"
