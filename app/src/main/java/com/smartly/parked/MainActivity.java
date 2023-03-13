@@ -2,16 +2,22 @@ package com.smartly.parked;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      //  this.configureToolBar();
+        this.configureToolBar();
         this.configureDrawerLayout();
         this.configurationNavigationView();
 
@@ -74,8 +80,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @SuppressLint("RestrictedApi")
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        if (menu instanceof MenuBuilder) {
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
     private void startTransactionFragment(Fragment fragment) {
         if (!fragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_frame_layout, fragment).commit();
         }}
+
+    @Override
+
+    public void onBackPressed(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you wanna exit the app?")
+                .setCancelable(false)
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity.this.finish();
+                        Toast.makeText(getApplicationContext(),"Leaving the page!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                        Toast.makeText(getApplicationContext(),"Permission Denied!",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+        builder.setIcon(android.R.drawable.btn_dialog);
+        builder.setTitle("Leaving !!!");
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
